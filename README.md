@@ -39,7 +39,7 @@ the engine to the wheels.
 
 ## Setup 
 * Clone the project repository.
-* Open TractorModelSimscape.prj to get started with the project. 
+* Open TractorSimscape.prj to get started with the project. 
 * Requires MATLAB&reg; release R2024a or newer.
 
 Copyright 2024 The MathWorks, Inc.
