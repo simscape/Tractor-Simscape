@@ -12,9 +12,9 @@ with a system-level analysis to evaluate the options. This project shows how to 
 system-level tractor model using Simscape&trade;, Simscape Driveline&trade; 
 and, Simscape Fluids&trade;.
 
-[![View Tractor Model with Simscape on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/tractor-model-with-simscape)
+[![View Tractor Model with Simscape on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/169116-tractor-model-with-simscape)
 
-[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=simscape/Tractor-Simscape)
+[![Open in MATLAB Online](https://www.mathworks.com/images/responsive/global/open-in-matlab-online.svg)](https://matlab.mathworks.com/open/github/v1?repo=simscape/Tractor-Simscape&project=TractorSimscape.prj)
 
 This project contains a simplified system-level tractor model for tillage 
 operation. You can define your own custom scenario and driver controls to 
