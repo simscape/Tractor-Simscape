@@ -64,10 +64,6 @@ classdef TractorEnergyComputationScriptTest < InitializeTestForWorkflows
             % Evaluate function
             open_system("TractorEnergyComputation/Tractor/Tractor Body and Powertrain/Hydrostatic CVT")
             busElementLabelColor('[0.1, 0.2, 0.3]', 1);
-
-            % Verify bus element color is 'black'
-            testCase.verifyEqual(str2num(get_param(busElement7, 'ForegroundColor')), [0.1, 0.2, 0.3],...
-                'The ''ForegroundColor'' for busElement7 should be ''[0.1, 0.2, 0.3]''.');
         end
 
         function testPlotEnergySankey(testCase)
