@@ -92,4 +92,4 @@ switch typeImplement.Value
 end
 end
 
-implementPortConnectivity(methodForceComputation);
+implementPortConnectivity(gcb,methodForceComputation);

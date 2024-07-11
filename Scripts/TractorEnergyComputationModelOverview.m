@@ -84,7 +84,7 @@ open_system('TractorEnergyComputation/Tractor/Tractor Body and Powertrain/Hydros
 %
 % <matlab:open_system('TractorEnergyComputation/Tractor/Front%20Left%20Tire') Open Front Left Tire Subsystem>
 
-open_system('TractorEnergyComputation/Tractor/Front Left Tire');
+open_system('TractorEnergyComputation/Tractor/Tire FL');
 
 %%
 % The Tire-Soil Interaction block is a custom Simscape component that models 
@@ -169,23 +169,23 @@ open_system('TractorEnergyComputation/Driver Controls');
 % The Energy Calculations subsystem computes the energy consumed by the various 
 % components of the transmission.
 %
-% <matlab:open_system('TractorEnergyComputation/System%20Signals%20and%20Information/Energy%20Calculations') Open Energy Calculations Subsystem>
+% <matlab:open_system('TractorEnergyComputation/System%20Signals%20and%20Information/Power%20and%20Energy%20Calculations') Open Energy Calculations Subsystem>
 
-open_system('TractorEnergyComputation/System Signals and Information/Energy Calculations');
+open_system('TractorEnergyComputation/System Signals and Information/Power and Energy Calculations');
 
 %%
 %
-% <matlab:open_system('TractorEnergyComputation/System%20Signals%20and%20Information/Energy%20Calculations/Pump%20Energy%20Computation/Pump%20Input%20Energy%20Computation') Open Transmission Pump Input Energy Computation Subsystem>
+% <matlab:open_system('TractorEnergyComputation/System%20Signals%20and%20Information/Power%20and%20Energy%20Calculations/Pump%20Computation/Pump%20Input%20Energy%20Computation') Open Transmission Pump Input Energy Computation Subsystem>
 
-open_system('TractorEnergyComputation/System Signals and Information/Energy Calculations/Pump Energy Computation/Pump Input Energy Computation');
+open_system('TractorEnergyComputation/System Signals and Information/Power and Energy Calculations/Pump Computation/Pump Input Energy Computation');
 
 %%
 % You can compute the transmission pump input energy as a product of the 
 % engine speed and engine torque.
 %
-% <matlab:open_system('TractorEnergyComputation/System%20Signals%20and%20Information/Energy%20Calculations/Pump%20Energy%20Computation/Pump%20Output%20Energy%20Computation') Open Transmission Pump Output Energy Computation Subsystem>
+% <matlab:open_system('TractorEnergyComputation/System%20Signals%20and%20Information/Power%20and%20Energy%20Calculations/Pump%20Computation/Pump%20Output%20Energy%20Computation') Open Transmission Pump Output Energy Computation Subsystem>
 
-open_system('TractorEnergyComputation/System Signals and Information/Energy Calculations/Pump Energy Computation/Pump Output Energy Computation');
+open_system('TractorEnergyComputation/System Signals and Information/Power and Energy Calculations/Pump Computation/Pump Output Energy Computation');
 
 %%
 % You can compute the transmission pump output energy as a product of the 

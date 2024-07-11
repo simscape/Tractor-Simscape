@@ -13,7 +13,8 @@ pump.initialDisplacement       = 60;                   % (cm^3/rev) Initial disp
 pump.displacementRamp          = -0.5;                 % (cm^3/(rev*s)) Displacement ramp
 pump.positiveDisplacementLimit = 60;                   % (cm^3/rev) Positive displacement limit
 pump.negativeDisplacementLimit = 10;                   % (cm^3/rev) Negative displacement limit 
-pump.rampStartTime             = 1950;                 % (s) Ramp start time
+pump.ramp1StartTime            = 1950;                 % (s) Ramp 1 start time 
+pump.ramp2StartTime            = 2100;                 % (s) Ramp 2 start time
 
 % Body Parameters
 
@@ -107,7 +108,8 @@ hydrostaticCVT.diameterPipe                = 0.05;     % (m) Pipe diameter
 
 %% Implement Parameters
 
-implement.depthTillage                     = 10;       % (cm) Tillage depth
+implement.depth1Tillage                    = 9;        % (cm) Tillage depth 1
+implement.depth2Tillage                    = 10;       % (cm) Tillage depth 2
 implement.angleRake                        = 55;       % (deg) Rake angle of implement tool
 implement.numberTools                      = 5;        % (1) Number of tools for a narrow implement
 
