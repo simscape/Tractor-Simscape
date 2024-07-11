@@ -1,4 +1,4 @@
-function implementPortConnectivity(methodForce)
+function implementPortConnectivity(currSys,methodForce)
 % This function enables or disables connectivity between Implement
 % block and subsystems such as Scenario and Controller based on the
 % dropdown option for 'Draft (horizontal) force and vertical force
@@ -6,13 +6,13 @@ function implementPortConnectivity(methodForce)
 
 % Copyright 2024 The MathWorks, Inc.
 
-implementSystemPath = 'TractorEnergyComputation/Implement';
-implementBlockPath = 'TractorEnergyComputation/Implement/Implement';
-terminatorPath = 'TractorEnergyComputation/Implement/Terminators';
-converter1Path = 'TractorEnergyComputation/Implement/Simulink-PS Converter';
-converter2Path = 'TractorEnergyComputation/Implement/Simulink-PS Converter1';
-bus1Path = 'TractorEnergyComputation/Implement/Bus Selector';
-bus2Path = 'TractorEnergyComputation/Implement/Bus Selector1';
+implementSystemPath = currSys;
+implementBlockPath = [currSys '/Implement'];
+terminatorPath = [currSys '/Terminators'];
+converter1Path = [currSys '/Simulink-PS Converter'];
+converter2Path = [currSys '/Simulink-PS Converter1'];
+bus1Path = [currSys '/Bus Selector'];
+bus2Path = [currSys '/Bus Selector1'];
 converter1LineHandles = get_param(converter1Path,'LineHandles');
 converter2LineHandles = get_param(converter2Path,'LineHandles');
 terminatorLineHandles = get_param(terminatorPath,'LineHandles');

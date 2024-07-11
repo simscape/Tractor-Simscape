@@ -9,7 +9,7 @@ To make changes, update the MATLAB code and republish this document.
 <title>Tractor Energy Computation Model</title>
 <meta name="generator" content="MATLAB 24.1">
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
-<meta name="DC.date" content="2024-06-17">
+<meta name="DC.date" content="2024-07-11">
 <meta name="DC.source" content="TractorEnergyComputationModelOverview.m">
 <style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
@@ -162,14 +162,14 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 <h2 id="14">Energy Calculations Subsystem</h2>
 <p>The Energy Calculations subsystem computes the energy consumed by the various components of the transmission.</p>
 <p>
-<a href="matlab:open_system('TractorEnergyComputation/System%20Signals%20and%20Information/Energy%20Calculations')">Open Energy Calculations Subsystem</a>
+<a href="matlab:open_system('TractorEnergyComputation/System%20Signals%20and%20Information/Power%20and%20Energy%20Calculations')">Open Energy Calculations Subsystem</a>
 </p>
 <img vspace="5" hspace="5" src="TractorEnergyComputationModelOverview_09.png" alt=""> <p>
-<a href="matlab:open_system('TractorEnergyComputation/System%20Signals%20and%20Information/Energy%20Calculations/Pump%20Energy%20Computation/Pump%20Input%20Energy%20Computation')">Open Transmission Pump Input Energy Computation Subsystem</a>
+<a href="matlab:open_system('TractorEnergyComputation/System%20Signals%20and%20Information/Power%20and%20Energy%20Calculations/Pump%20Computation/Pump%20Input%20Energy%20Computation')">Open Transmission Pump Input Energy Computation Subsystem</a>
 </p>
 <img vspace="5" hspace="5" src="TractorEnergyComputationModelOverview_10.png" alt=""> <p>You can compute the transmission pump input energy as a product of the engine speed and engine torque.</p>
 <p>
-<a href="matlab:open_system('TractorEnergyComputation/System%20Signals%20and%20Information/Energy%20Calculations/Pump%20Energy%20Computation/Pump%20Output%20Energy%20Computation')">Open Transmission Pump Output Energy Computation Subsystem</a>
+<a href="matlab:open_system('TractorEnergyComputation/System%20Signals%20and%20Information/Power%20and%20Energy%20Calculations/Pump%20Computation/Pump%20Output%20Energy%20Computation')">Open Transmission Pump Output Energy Computation Subsystem</a>
 </p>
 <img vspace="5" hspace="5" src="TractorEnergyComputationModelOverview_11.png" alt=""> <p>You can compute the transmission pump output energy as a product of the pump volumetric flow rate and the pressure difference across the pump.</p>
 <h2 id="18">Transmission Energy Chart Dashboard</h2>
@@ -281,7 +281,7 @@ open_system('TractorEnergyComputation/Tractor/Tractor Body and Powertrain/Hydros
 %
 % <matlab:open_system('TractorEnergyComputation/Tractor/Front%20Left%20Tire') Open Front Left Tire Subsystem>
 
-open_system('TractorEnergyComputation/Tractor/Front Left Tire');
+open_system('TractorEnergyComputation/Tractor/Tire FL');
 
 %%
 % The Tire-Soil Interaction block is a custom Simscape component that models 
@@ -366,23 +366,23 @@ open_system('TractorEnergyComputation/Driver Controls');
 % The Energy Calculations subsystem computes the energy consumed by the various 
 % components of the transmission.
 %
-% <matlab:open_system('TractorEnergyComputation/System%20Signals%20and%20Information/Energy%20Calculations') Open Energy Calculations Subsystem>
+% <matlab:open_system('TractorEnergyComputation/System%20Signals%20and%20Information/Power%20and%20Energy%20Calculations') Open Energy Calculations Subsystem>
 
-open_system('TractorEnergyComputation/System Signals and Information/Energy Calculations');
+open_system('TractorEnergyComputation/System Signals and Information/Power and Energy Calculations');
 
 %%
 %
-% <matlab:open_system('TractorEnergyComputation/System%20Signals%20and%20Information/Energy%20Calculations/Pump%20Energy%20Computation/Pump%20Input%20Energy%20Computation') Open Transmission Pump Input Energy Computation Subsystem>
+% <matlab:open_system('TractorEnergyComputation/System%20Signals%20and%20Information/Power%20and%20Energy%20Calculations/Pump%20Computation/Pump%20Input%20Energy%20Computation') Open Transmission Pump Input Energy Computation Subsystem>
 
-open_system('TractorEnergyComputation/System Signals and Information/Energy Calculations/Pump Energy Computation/Pump Input Energy Computation');
+open_system('TractorEnergyComputation/System Signals and Information/Power and Energy Calculations/Pump Computation/Pump Input Energy Computation');
 
 %%
 % You can compute the transmission pump input energy as a product of the 
 % engine speed and engine torque.
 %
-% <matlab:open_system('TractorEnergyComputation/System%20Signals%20and%20Information/Energy%20Calculations/Pump%20Energy%20Computation/Pump%20Output%20Energy%20Computation') Open Transmission Pump Output Energy Computation Subsystem>
+% <matlab:open_system('TractorEnergyComputation/System%20Signals%20and%20Information/Power%20and%20Energy%20Calculations/Pump%20Computation/Pump%20Output%20Energy%20Computation') Open Transmission Pump Output Energy Computation Subsystem>
 
-open_system('TractorEnergyComputation/System Signals and Information/Energy Calculations/Pump Energy Computation/Pump Output Energy Computation');
+open_system('TractorEnergyComputation/System Signals and Information/Power and Energy Calculations/Pump Computation/Pump Output Energy Computation');
 
 %%
 % You can compute the transmission pump output energy as a product of the 
