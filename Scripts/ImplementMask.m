@@ -22,6 +22,7 @@ vectorVF = maskObj.getParameter('vectorVF');
 vectorVelocity = maskObj.getParameter('vectorVelocity');
 
 if strcmp(methodForceComputation.Value,'Specify vectors for draft force, vertical force and velocity')
+    set_param(gcb,'Tag','Custom Load Cycle')
     typeImplement.Visible = 'off';
     widthImplement.Visible = 'off';
     numberTools.Visible = 'off';
@@ -33,7 +34,8 @@ if strcmp(methodForceComputation.Value,'Specify vectors for draft force, vertica
     set_param(implementBlockPath,'draft_vector',mat2str(draftForce));
     set_param(implementBlockPath,'VF_vector',mat2str(verticalForce));
 
-elseif strcmp(methodForceComputation.Value,'Draft force prediction based on ASABE D497.5 standard') 
+elseif strcmp(methodForceComputation.Value,'Draft force prediction based on ASABE D497.5 standard')
+    set_param(gcb,'Tag','ASABE 497.5 Load Cycle')
     typeImplement.Visible = 'on';
     
 switch typeImplement.Value
