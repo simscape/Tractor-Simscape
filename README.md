@@ -36,10 +36,15 @@ the engine to the wheels.
 
 ![](Overview/html/TransmissionEnergySankeyDiagram.png)
 
+4. Perform Transmission Trade-Off Study for a Tractor for a given 
+agricultural drive cycle.
+
+![](Overview/html/TransmissionTradeOffHeatmap.png)
+
 
 ## Setup 
 * Clone the project repository.
 * Open TractorSimscape.prj to get started with the project. 
-* Requires MATLAB&reg; release R2024a or newer.
+* Requires MATLAB&reg; release R2024b or newer.
 
-Copyright 2024 The MathWorks, Inc.
+Copyright 2024 - 2025 The MathWorks, Inc.

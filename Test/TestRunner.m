@@ -8,7 +8,7 @@
 relStr = matlabRelease().Release;
 disp("This is MATLAB " + relStr + ".");
 
-topFolder = currentProject().RootFolder;
+topFolder = currentProject().RootFolder
 
 %% Create test suite
 % Test suite for unit test

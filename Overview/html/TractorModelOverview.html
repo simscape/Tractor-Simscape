@@ -7,9 +7,9 @@ This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
       -->
 <title>Tractor Model with Simscape</title>
-<meta name="generator" content="MATLAB 24.1">
+<meta name="generator" content="MATLAB 24.2">
 <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
-<meta name="DC.date" content="2024-07-11">
+<meta name="DC.date" content="2025-02-18">
 <meta name="DC.source" content="TractorModelOverview.m">
 <style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
@@ -87,10 +87,10 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 <a href="#1">Tractor For Tillage Operation</a>
 </li>
 <li>
-<a href="#3">Workflows</a>
+<a href="#5">Workflows</a>
 </li>
 <li>
-<a href="#4">Model</a>
+<a href="#6">Model</a>
 </li>
 </ul>
 </div>
@@ -124,15 +124,21 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 <p>3. <b>Create Transmission Energy Charting for a Tractor:</b> After you create the tractor energy computation model, you can compute the transmission losses and visualize the energy flow from the engine to the wheels. To create the transmission energy charting for a tractor, see <a href="matlab:open('TransmissionEnergyChartingWorkflow.mlx')">Create Transmission Energy Charting for a Tractor</a>. This figure shows the energy flow of the tractor and was generated using the Create Transmission Energy Charting for a Tractor workflow.</p>
 <p>
 <img vspace="5" hspace="5" src="TransmissionEnergySankeyDiagram.png" alt=""> </p>
-<h2 id="3">Workflows</h2>
+<p>4. <b>Perform Transmission Trade-Off Study for a Tractor:</b> You can select transmission hydraulic components from available options that minimize energy consumption for a specific agricultural drive cycle.</p>
+<p>
+<img vspace="5" hspace="5" src="TransmissionTradeOffHeatmap.png" alt=""> </p>
+<h2 id="5">Workflows</h2>
 <div>
 <ul>
 <li>
 <a href="matlab:open('TransmissionEnergyChartingWorkflow.mlx')">Create Transmission Energy Charting for a Tractor</a>
 </li>
+<li>
+<a href="matlab:open('TransmissionTradeOffStudyWorkflow.mlx')">Perform Transmission Trade-Off Study for a Tractor</a>
+</li>
 </ul>
 </div>
-<h2 id="4">Model</h2>
+<h2 id="6">Model</h2>
 <div>
 <ul>
 <li>
@@ -140,8 +146,8 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 </li>
 </ul>
 </div>
-<p class="footer">Copyright 2024 The MathWorks, Inc.<br>
-<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2024a</a>
+<p class="footer">Copyright 2024 - 2025 The MathWorks, Inc.<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2024b</a>
 <br>
 </p>
 </div>
@@ -154,7 +160,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 % visualize energy charts for a tractor.
 %
 
-% Copyright 2024 The MathWorks, Inc.
+% Copyright 2024 - 2025 The MathWorks, Inc.
 
 %% Tractor For Tillage Operation
 %
@@ -224,10 +230,24 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 % <<TransmissionEnergySankeyDiagram.png>>
 %
 
+%%
+%
+% 4. *Perform Transmission Trade-Off Study for a Tractor:* You can
+% select transmission hydraulic components from available options that 
+% minimize energy consumption for a specific agricultural drive cycle.
+%
+
+%%
+%
+% <<TransmissionTradeOffHeatmap.png>>
+%
+
 %% Workflows  
 %
 % * <matlab:open('TransmissionEnergyChartingWorkflow.mlx') Create Transmission 
 % Energy Charting for a Tractor>
+% * <matlab:open('TransmissionTradeOffStudyWorkflow.mlx') Perform 
+% Transmission Trade-Off Study for a Tractor>
 %
 %% Model
 %

@@ -1,6 +1,6 @@
 % Code to initialize parameters for TractorEnergyComputation
 
-% Copyright 2024 The MathWorks, Inc.
+% Copyright 2024 - 2025 The MathWorks, Inc.
 
 %% Tractor Parameters
 
@@ -70,7 +70,7 @@ tire.tyn    = 0.781;        % (deg) Tire-soil sinkage exponent
 finalDrive.gearRatioRear       = 4;                    % (1) Carrier to drive shaft teeth ratio
 finalDrive.gearRatioFront      = 2;                    % (1) Carrier to drive shaft teeth ratio
 finalDrive.gearRatioFinalDrive = 1;                    % (1) Follower to base teeth ratio
-finalDrive.inertiaDriveshaft   = 15;                   % (kg-m^2) Drive shaft inertia
+finalDrive.inertiaDriveshaft   = 1;                    % (kg-m^2) Drive shaft inertia
 
 %% Hydrostatic Transmission Parameters
 % Pump and Motor Parameters
@@ -110,6 +110,7 @@ hydrostaticCVT.diameterPipe                = 0.05;     % (m) Pipe diameter
 
 implement.depth1Tillage                    = 9;        % (cm) Tillage depth 1
 implement.depth2Tillage                    = 10;       % (cm) Tillage depth 2
+implement.depth3Tillage                    = 8;        % (cm) Tillage depth for transmission trade-off study
 implement.angleRake                        = 55;       % (deg) Rake angle of implement tool
 implement.numberTools                      = 5;        % (1) Number of tools for a narrow implement
 

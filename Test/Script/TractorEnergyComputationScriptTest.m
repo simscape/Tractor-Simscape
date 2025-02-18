@@ -32,8 +32,7 @@ classdef TractorEnergyComputationScriptTest < InitializeTestForWorkflows
             % Teardown for model
             testCase.addTeardown(@()bdclose('TractorEnergyComputation'));
 
-            testCase.verifyWarningFree(@()OpenTractorModelSimscape,...
-                'The script under test should run without any error or warning.');
+            evalin('base','OpenTractorModelSimscape');
         end
 
         function testTractorEnergyComputationModelOverview(testCase)

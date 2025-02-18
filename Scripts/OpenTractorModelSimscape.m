@@ -4,3 +4,4 @@
 
 web('TractorModelOverview.html') 
 open_system('TractorEnergyComputation')
+run TractorEnergyComputationInput

@@ -5,7 +5,7 @@
 % visualize energy charts for a tractor.
 %
 
-% Copyright 2024 The MathWorks, Inc.
+% Copyright 2024 - 2025 The MathWorks, Inc.
 
 %% Tractor For Tillage Operation
 %
@@ -75,10 +75,24 @@
 % <<TransmissionEnergySankeyDiagram.png>>
 %
 
+%%
+%
+% 4. *Perform Transmission Trade-Off Study for a Tractor:* You can
+% select transmission hydraulic components from available options that 
+% minimize energy consumption for a specific agricultural drive cycle.
+%
+
+%%
+%
+% <<TransmissionTradeOffHeatmap.png>>
+%
+
 %% Workflows  
 %
 % * <matlab:open('TransmissionEnergyChartingWorkflow.mlx') Create Transmission 
 % Energy Charting for a Tractor>
+% * <matlab:open('TransmissionTradeOffStudyWorkflow.mlx') Perform 
+% Transmission Trade-Off Study for a Tractor>
 %
 %% Model
 %
