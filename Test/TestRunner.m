@@ -3,7 +3,7 @@
 % that consists of test classes in the 'Test' folder. The runner runs
 % the test suite and generates output.
 
-% Copyright 2024 The MathWorks, Inc.
+% Copyright 2024-25 The MathWorks, Inc.
 
 relStr = matlabRelease().Release;
 disp("This is MATLAB " + relStr + ".");
