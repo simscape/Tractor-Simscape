@@ -3,5 +3,7 @@
 % Copyright 2024-26 The MathWorks, Inc.
 
 web('projectDocumentationPage.html') 
-open_system('TractorEnergyComputation')
-run TractorEnergyComputationInput
+if ~batchStartupOptionUsed
+    open_system('TractorEnergyComputation')
+    run TractorEnergyComputationInput
+end

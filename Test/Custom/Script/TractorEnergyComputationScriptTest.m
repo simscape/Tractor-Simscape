@@ -52,7 +52,7 @@ classdef TractorEnergyComputationScriptTest < InitializeTestForWorkflows
 
             % Open model and add teardown
             modelname = 'TractorEnergyComputation';
-            open_system(modelname);
+            load_system(modelname);
             testCase.addTeardown(@()bdclose(modelname));
 
             % Verify initial condition
@@ -61,7 +61,7 @@ classdef TractorEnergyComputationScriptTest < InitializeTestForWorkflows
                 'The initial ''ForegroundColor'' for busElement7 should not be as expected.');
 
             % Evaluate function
-            open_system("TractorEnergyComputation/Tractor/Tractor Body and Powertrain/Hydrostatic CVT")
+            load_system("TractorEnergyComputation/Tractor/Tractor Body and Powertrain/Hydrostatic CVT")
             busElementLabelColor('[0.1, 0.2, 0.3]', 1);
         end
 
@@ -70,7 +70,7 @@ classdef TractorEnergyComputationScriptTest < InitializeTestForWorkflows
 
             % Open model and add teardown
             modelname = 'TractorEnergyComputation';
-            open_system(modelname);
+            load_system(modelname);
             testCase.addTeardown(@()bdclose(modelname));
 
             % Simulate the model to get logged signals
