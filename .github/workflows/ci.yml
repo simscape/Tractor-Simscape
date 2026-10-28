@@ -33,12 +33,16 @@ on:
       - '**.xml'
 
   schedule:
-    - cron:  '0 3 * * 1' # schedule a weekly build (Monday 4:30 UTC)
+    - cron:  '0 3 * * 1' # schedule a weekly build (Monday 03:00 UTC)
 
 jobs:
 
   job-check-project:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
 
       - name: Check out repository
@@ -47,7 +51,7 @@ jobs:
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v3
         with:
-          release: R2025bu5
+          release: R2025b
           cache: true
           products: |
             Simulink
