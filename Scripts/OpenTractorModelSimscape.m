@@ -2,8 +2,8 @@
 
 % Copyright 2024-26 The MathWorks, Inc.
 
-web('projectDocumentationPage.html') 
 if ~batchStartupOptionUsed
+    web('projectDocumentationPage.html') 
     open_system('TractorEnergyComputation')
     run TractorEnergyComputationInput
 end
