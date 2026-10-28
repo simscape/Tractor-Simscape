@@ -47,7 +47,7 @@ jobs:
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v3
         with:
-          release: R2025bu7
+          release: R2025bu5
           cache: true
           products: |
             Simulink
@@ -55,61 +55,7 @@ jobs:
             Simscape_Driveline
             Simscape_Fluids
 
-      # ---------------- INVESTIGATION STEPS (temporary) ----------------
-      # Each step uses continue-on-error so every stage runs and reports its
-      # own exit code. Compare which steps go red to isolate the failure.
-
-      # 1) Baseline: does an empty MATLAB session exit 0 on this runner?
-      - name: "[diag] Baseline MATLAB exit"
-        continue-on-error: true
-        uses: matlab-actions/run-command@v3
-        with:
-          command: disp("** baseline OK"); disp(version); disp(usejava('desktop')); disp(usejava('awt'));
-
-      # 2) Project only: the project startup file (OpenTractorModelSimscape.m)
-      #    calls web() and open_system(), which need a display.
-      - name: "[diag] Open project only"
-        continue-on-error: true
-        uses: matlab-actions/run-command@v3
-        with:
-          command: openProject(pwd); disp("** project opened"); disp(currentProject().StartupFiles');
-          startup-options: -logfile diag-open-project.log
-
-      # 3) Full run with markers: if every marker prints and the step still
-      #    fails, the non-zero exit happens during MATLAB shutdown.
       - name: Run tests
-        id: run-tests
-        continue-on-error: true
         uses: matlab-actions/run-command@v3
         with:
-          command: >-
-            openProject(pwd); disp("** project opened");
-            buildtool AllTest; disp("** buildtool returned");
-            close(currentProject); disp("** project closed");
-            bdclose("all"); close("all","force"); disp("** cleanup done, exiting MATLAB");
-          startup-options: -logfile diag-run-tests.log
-
-      - name: "[diag] Search logs for exceptions and crash dumps"
-        if: always()
-        run: |
-          echo "=== Java / MATLAB exceptions in logs ==="
-          grep -n -i -E "exception|error|segmentation|fatal|crash" diag-*.log || echo "none found"
-          echo "=== Crash dumps ==="
-          ls -la ~/matlab_crash_dump.* 2>/dev/null || echo "no matlab_crash_dump files"
-          find ~ /tmp "$GITHUB_WORKSPACE" -name 'hs_err_pid*.log' 2>/dev/null || true
-          for f in ~/matlab_crash_dump.*; do [ -f "$f" ] && cat "$f"; done; true
-
-      - name: "[diag] Upload logs and test reports"
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: matlab-diagnostics
-          path: |
-            diag-*.log
-            Test/ProjectTestReport/**
-            ~/matlab_crash_dump.*
-          if-no-files-found: warn
-
-      - name: "[diag] Propagate test step result"
-        if: steps.run-tests.outcome == 'failure'
-        run: exit 1
+          command: openProject(pwd); buildtool AllTest;
