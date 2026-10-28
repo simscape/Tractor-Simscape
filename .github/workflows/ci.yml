@@ -33,7 +33,7 @@ on:
       - '**.xml'
 
   schedule:
-    - cron:  '30 4 * * 1' # schedule a weekly build (Monday 4:30 UTC)
+    - cron:  '0 3 * * 1' # schedule a weekly build (Monday 4:30 UTC)
 
 jobs:
 
@@ -42,7 +42,7 @@ jobs:
     steps:
 
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
 
       - name: Setup MATLAB
         uses: matlab-actions/setup-matlab@v3
@@ -54,7 +54,6 @@ jobs:
             Simscape
             Simscape_Driveline
             Simscape_Fluids
-            MATLAB_Test
 
       - name: Run tests
         uses: matlab-actions/run-command@v3
