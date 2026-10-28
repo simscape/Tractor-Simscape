@@ -9,7 +9,7 @@
 # For details about the syntax of this file, see
 # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
 
-# Copyright 2024 - 2025 The MathWorks, Inc.
+# Copyright 2024 - 2026 The MathWorks, Inc.
 
 name: CI using MATLAB
 
@@ -33,30 +33,33 @@ on:
       - '**.xml'
 
   schedule:
-    - cron:  '55/61 20/25 1/6 * *' # schedule a weekly-ish build
+    - cron:  '0 3 * * 1' # schedule a weekly build (Monday 03:00 UTC)
 
 jobs:
 
   job-check-project:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
     steps:
 
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup MATLAB
-        uses: matlab-actions/setup-matlab@v2
+        uses: matlab-actions/setup-matlab@v3
         with:
-          release: R2025a
+          release: R2025b
           cache: true
           products: |
             Simulink
             Simscape
             Simscape_Driveline
             Simscape_Fluids
-            MATLAB_Test
 
       - name: Run tests
-        uses: matlab-actions/run-command@v2
+        uses: matlab-actions/run-command@v3
         with:
-          command: openProject(pwd); TestRunner;
+          command: openProject(pwd); buildtool AllTest;

@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Tractor Model with Simscape</title>
+    <!--
+    ============================================================
+    DOCUMENTATION TEMPLATE - MathWorks Style
+    ============================================================
+    Enhanced: Card grids preserve original size on browser resize.
+    A page-level horizontal scrollbar appears when the viewport
+    is too narrow to fit the content at its natural width.
+    Changes from original:
+      - .card-grid and .example-grid use fixed-width columns (no shrinking)
+      - .content has a min-width so the entire page scrolls horizontally
+      - Cards stay readable at all browser widths
+    ============================================================
+    -->
+    <style>
+        body { margin: 0; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #212121; }
+        a { color: #0076a8; text-decoration: none; }
+        a:hover { color: #004c6d; text-decoration: underline; }
+
+        /* Fixed title bar */
+        .page-title {
+            position: fixed; top: 0; left: 0; right: 0;
+            background: #fff; border-bottom: 1px solid #e0e0e0;
+            margin: 0; z-index: 200;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .page-title .title-text {
+            font-size: 28px; font-weight: 400; color: #c04c0b;
+            padding: 14px 20px;
+        }
+        .page-title .title-logo {
+            padding: 6px 20px;
+        }
+        .page-title .title-logo img {
+            height: 25px; width: auto;
+        }
+
+        /* Left sidebar */
+        .sidebar {
+            position: fixed; top: 60px; left: 0;
+            width: 160px; height: calc(100vh - 60px);
+            background: #f7f7f7; border-right: 1px solid #e0e0e0;
+            padding: 20px 12px; overflow-y: auto;
+        }
+        .sidebar ul { list-style: none; padding: 0; margin: 0; }
+        .sidebar li { margin: 6px 0; }
+        .sidebar li.sub { padding-left: 14px; }
+
+        /* Right content area - min-width prevents shrinking below card grid width */
+        .content {
+            margin-left: 160px;
+            padding: 90px 40px 30px;
+            max-width: 800px;
+            min-width: 760px;
+        }
+
+        h1 { font-size: 20px; font-weight: 700; color: #c04c0b; margin: 30px 0 8px; scroll-margin-top: 90px;
+             border-bottom: 1px solid #e0e0e0; padding-bottom: 8px; }
+        h2 { font-size: 16px; font-weight: 700; color: #212121; margin: 22px 0 6px; scroll-margin-top: 90px; }
+        p { margin: 8px 0; line-height: 1.6; color: #212121; }
+
+        .code {
+            background: #f5f5f5; border-left: 3px solid #0076a8;
+            padding: 10px 14px; margin: 10px 0 20px;
+            font-family: 'Courier New', monospace; font-size: 12px; color: #212121;
+        }
+
+
+        /* Collapsible sub-headings */
+        .collapsible {
+            cursor: pointer; display: flex; align-items: center; user-select: none;
+        }
+        .collapsible::before {
+            content: '\25B6'; font-size: 10px; color: #0076a8;
+            margin-right: 8px; transition: transform 0.2s;
+        }
+        .collapsible.open::before { transform: rotate(90deg); }
+        .collapse-body { display: none; padding-left: 18px; }
+        .collapse-body.open { display: block; }
+
+        /* Example cards - 3 column grid with fixed-width cards */
+        .example-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 200px);
+            gap: 16px;
+            min-width: max-content;
+        }
+        .example-card {
+            border: 1px solid #e0e0e0; border-radius: 3px;
+            padding: 12px; background: #fff;
+            width: 200px;
+        }
+        .example-card:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+        .example-card .thumb {
+            display: block; width: 100%; height: 80px; margin-bottom: 8px;
+            border: 1px solid #d0e4ef; object-fit: cover;
+        }
+        .example-card .card-title { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+        .example-card .card-title a { color: #0076a8; }
+        .example-card .card-desc { font-size: 11px; color: #555; line-height: 1.5; }
+
+        /* Model cards (workflow cards) - fixed-width cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 220px);
+            gap: 1.5rem;
+            min-width: max-content;
+        }
+        .model-card {
+            background: #fff; border: 1px solid #0076a8;
+            border-radius: 4px; overflow: hidden;
+            transition: box-shadow 0.2s, transform 0.15s;
+            width: 220px;
+        }
+        .model-card:hover {
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            transform: translateY(-1px);
+        }
+        .card-header-bar {
+            height: 3px; background: #0076a8;
+        }
+        .card-image {
+            width: 100%; height: 100px; object-fit: contain;
+            background: #f0f4f8; border-bottom: 1px solid #e0e0e0; padding: 6px;
+            box-sizing: border-box;
+        }
+        .card-content {
+            padding: 0.8rem;
+        }
+        .card-content h3 {
+            margin: 0 0 0.3rem 0; font-size: 12px; font-weight: 600;
+            color: #212121; line-height: 1.4;
+        }
+        .card-content p {
+            margin: 0 0 0.6rem 0; font-size: 11px;
+            color: #555; line-height: 1.5;
+        }
+        .card-actions {
+            display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.8rem;
+        }
+        .btn-load {
+            padding: 6px 12px; border: none; border-radius: 4px;
+            font-size: 11px; font-weight: 500; cursor: pointer;
+            transition: background 0.2s; text-decoration: none;
+            display: inline-block; white-space: nowrap;
+        }
+        .btn-load.btn-primary {
+            background: #0076a8; color: #fff;
+        }
+        .btn-load.btn-primary:hover {
+            background: #005a7c; text-decoration: none; color: #fff;
+        }
+        .btn-load.btn-secondary {
+            background: #f5f5f5; color: #0076a8; border: 1px solid #e0e0e0;
+        }
+        .btn-load.btn-secondary:hover {
+            background: #e8f4f8;
+        }
+        .card-code {
+            margin-top: 0.5rem; padding: 0.4rem 0.6rem;
+            background: #f5f5f5; border: 1px solid #e0e0e0;
+            border-radius: 4px; font-family: 'Courier New', monospace;
+            font-size: 11px; color: #212121;
+            word-wrap: break-word; overflow-wrap: break-word; white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+<!-- ============================================================
+     TITLE: Edit text below
+     ============================================================ -->
+<div class="page-title">
+    <span class="title-text">Tractor Model with Simscape</span>
+    <span class="title-logo"><img src="Images/MATLAB_VERSION.png" alt="MATLAB Version"></span>
+</div>
+
+<!-- ============================================================
+     SIDEBAR: Add/remove <li> entries to match your content sections.
+     Use class="sub" for indented sub-section links.
+     ============================================================ -->
+<nav class="sidebar">
+    <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#get-started">Get Started</a></li>
+        <li><a href="#Workflow">Workflow</a></li>
+        <li class="sub"><a href="#app-EnergyCharting">Energy Charting</a></li>
+        <li class="sub"><a href="#app-TradeOffStudy">Trade-Off Study</a></li>
+        <li><a href="#model">Model</a></li>
+        <li><a href="#components">Components</a></li>
+        <li><a href="#test">Testing</a></li>
+        <li><a href="#requirements">Requirements</a></li>
+    </ul>
+</nav>
+
+<!-- ============================================================
+     CONTENT: Main scrollable area. Edit sections below.
+     ============================================================ -->
+<main class="content">
+
+    <!-- Section: Overview -->
+    <h1 id="overview">Overview</h1>
+    <p>
+        This project contains custom libraries, models, and code to help you model
+        tractors. You can learn to evaluate transmission losses and visualize energy
+        charts for a tractor.<br><br>
+        Tractor design is an important step to boost efficiency in the agriculture.
+        Developing a tractor model that interacts with the environment requires an
+        accurate model of tire-soil dynamics that includes interaction of tractive
+        elements such as tire and implement with soil, which is a complicated problem
+        to solve. You can accelerate the development process by starting with a
+        system-level analysis to evaluate the options. This project shows how to
+        create a system-level tractor model using Simscape&trade;, Simscape Driveline&trade;,
+        and Simscape Fluids&trade;.
+    </p>
+
+    <!-- Section: Get Started -->
+    <h1 id="get-started">Get Started</h1>
+    <p>
+        Double-click on the <a href="matlab:openProject('TractorSimscape.prj')">
+        TractorSimscape PRJ</a> file (in the root folder) to setup the
+        project and get started.
+    </p>
+
+    <!-- Section: Workflow (parent for collapsible sub-sections) -->
+    <h1 id="Workflow">Workflow</h1>
+    <p>
+        Click on the hyperlinks to navigate to the application workflows or
+        live-scripts.
+    </p>
+
+    <!-- Sub-section: Energy Charting (collapsible, with card grid) -->
+    <h2 id="app-EnergyCharting" class="collapsible" onclick="toggle(this)">Energy Charting</h2>
+    <div class="collapse-body">
+        <div class="card-grid">
+            <div class="model-card">
+                <div class="card-header-bar"></div>
+                <img class="card-image" src="Images/TransmissionEnergySankeyDiagram.png" alt="Transmission Energy Sankey Diagram">
+                <div class="card-content">
+                    <h3>Create Transmission Energy Charting</h3>
+                    <p>Compute transmission losses and visualize energy flow from engine to wheels using a Sankey diagram.</p>
+                    <div class="card-actions">
+                        <a href="matlab:open('TransmissionEnergyChartingWorkflow.mlx')" class="btn-load btn-primary">Open Live Script</a>
+                        <button class="btn-load btn-secondary" onclick="copyCommand(this, &quot;open('TransmissionEnergyChartingWorkflow.mlx')&quot;)">Copy Command</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sub-section: Trade-Off Study (collapsible, with card grid) -->
+    <h2 id="app-TradeOffStudy" class="collapsible" onclick="toggle(this)">Trade-Off Study</h2>
+    <div class="collapse-body">
+        <div class="card-grid">
+            <div class="model-card">
+                <div class="card-header-bar"></div>
+                <img class="card-image" src="Images/TransmissionTradeOffHeatmap.png" alt="Transmission Trade-Off Heatmap">
+                <div class="card-content">
+                    <h3>Transmission Trade-Off Study</h3>
+                    <p>Select transmission line hydraulic components from various available parts that minimize energy consumption for a given agricultural drive cycle.</p>
+                    <div class="card-actions">
+                        <a href="matlab:open('TransmissionTradeOffStudyWorkflow.mlx')" class="btn-load btn-primary">Open Live Script</a>
+                        <button class="btn-load btn-secondary" onclick="copyCommand(this, &quot;open('TransmissionTradeOffStudyWorkflow.mlx')&quot;)">Copy Command</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section: Model -->
+    <h1 id="model">Model</h1>
+    <p>
+        The tractor energy computation model uses parameterized custom components
+        and library blocks from Simscape Foundation and Simscape Driveline to
+        simulate a tractor performing tillage operations.
+    </p>
+    <div class="card-grid">
+        <div class="model-card">
+            <div class="card-header-bar"></div>
+            <img class="card-image" src="Images/TractorEnergyComputationModel.png" alt="Tractor Energy Computation Model">
+            <div class="card-content">
+                <h3>Tractor Energy Computation Model</h3>
+                <p>System-level tractor model for tillage operation with energy computation and visualization.</p>
+                <div class="card-actions">
+                    <a href="matlab:open_system('TractorEnergyComputation.slx')" class="btn-load btn-primary">Open Model</a>
+                    <button class="btn-load btn-secondary" onclick="copyCommand(this, &quot;open_system('TractorEnergyComputation.slx')&quot;)">Copy Command</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section: Components -->
+    <h1 id="components">Components</h1>
+    <p>
+        The project contains custom library blocks and subsystem references that
+        serve as early-stage design components for the development of a fast running
+        system-level tractor model. The custom library blocks use the Simscape
+        language framework. You can parameterize the custom components to suit
+        your application.
+    </p>
+    <h2 id="app-TractorComponents" class="collapsible" onclick="toggle(this)">Tractor</h2>
+    <div class="collapse-body">
+        <div class="card-grid">
+            <div class="model-card">
+                <div class="card-header-bar"></div>
+                <img class="card-image" src="Images/Tire-Soil Interaction.svg" alt="Tire-Soil Interaction">
+                <div class="card-content">
+                    <h3>Tire-Soil Interaction</h3>
+                    <p>Custom block representing tire-soil interaction based on Bekker equation. Includes tractive effort with slip, compaction, and flexing effects.</p>
+                    <div class="card-actions">
+                        <a href="matlab:open('ReportTireSoilModelInfo.mlx')" class="btn-load btn-primary">Open Documentation</a>
+                        <button class="btn-load btn-secondary" onclick="copyCommand(this, &quot;open('ReportTireSoilModelInfo.mlx')&quot;)">Copy Command</button>
+                    </div>
+                </div>
+            </div>
+            <div class="model-card">
+                <div class="card-header-bar"></div>
+                <img class="card-image" src="Images/Implement.svg" alt="Implement Block">
+                <div class="card-content">
+                    <h3>Implement</h3>
+                    <p>Custom implement block that models the load applied to the tractor during tillage operations.</p>
+                    <div class="card-actions">
+                        <a href="matlab:open('ImplementBlockHelp.mlx')" class="btn-load btn-primary">Open Documentation</a>
+                        <button class="btn-load btn-secondary" onclick="copyCommand(this, &quot;open('ImplementBlockHelp.mlx')&quot;)">Copy Command</button>
+                    </div>
+                </div>
+            </div>
+            <div class="model-card">
+                <div class="card-header-bar"></div>
+                <img class="card-image" src="Images/HydrostaticCVT.png" alt="Hydrostatic CVT">
+                <div class="card-content">
+                    <h3>Hydrostatic CVT</h3>
+                    <p>Subsystem reference implementing a hydrostatic continuously variable transmission (CVT) for the tractor powertrain.</p>
+                    <div class="card-actions">
+                        <a href="matlab:open_system('HydrostaticCVT')" class="btn-load btn-primary">Open Subsystem</a>
+                        <button class="btn-load btn-secondary" onclick="copyCommand(this, &quot;open_system('HydrostaticCVT')&quot;)">Copy Command</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Section: Testing -->
+    <h1 id="test">Testing</h1>
+    <p>
+        To learn more about the testing used in this project for components and
+        workflows, see <a href="matlab:web('TestFrameworkHome.html')">
+        Testing Framework Documentation</a>. You can run different built in tests
+        by going to MATLAB project tool strip and selecting Run Build.
+    </p>
+
+    <!-- Section: Requirements -->
+    <h1 id="requirements">Requirements</h1>
+    <p>This project requires:</p>
+    <p style="margin-left: 20px;">
+        1. MATLAB&reg;<br>
+        2. MATLAB Test&trade;<br>
+        3. Simulink&reg;<br>
+        4. Simscape&trade;<br>
+        5. Simscape Driveline&trade;<br>
+        6. Simscape Fluids&trade;
+    </p>
+
+    <p>
+        <br> <br>
+        <i>Copyright 2024 - 2026 The MathWorks, Inc.</i>
+    </p>
+
+</main>
+
+<!-- Toggle script for collapsible sub-headings (do not remove) -->
+<script>
+function toggle(el) {
+    el.classList.toggle('open');
+    el.nextElementSibling.classList.toggle('open');
+}
+
+function copyCommand(btn, cmd) {
+    navigator.clipboard.writeText(cmd).then(function() {
+        var original = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(function() { btn.textContent = original; }, 1500);
+    });
+}
+</script>
+
+</body>
+</html>
