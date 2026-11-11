@@ -5,7 +5,7 @@ function [inputEnergyTotal,lossFrontMotor,lossRearMotor,lossPump,lossChargePump,
 %   signals. This function computes energy loss of front motor, rear motor
 %   and pump using the simulation output data.
 
-% Copyright 2024 The MathWorks, Inc.
+% Copyright 2024-26 The MathWorks, Inc.
 
 % Obtain values of logged signals from simulation output
 time = logsout{1}.Values.Engine.engineSpeed.Time;
